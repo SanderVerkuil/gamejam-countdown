@@ -13,12 +13,8 @@
 </div>
 
 <div class="container">
-<div class="item hidden"><span>Nog</span></div>
-<div class="item hidden"><span class="days"></span> <span class="days-info">dagen</span></div>
-<div class="item hidden"><span class="hours"></span> <span class="hours-info">uren</span></div>
-<div class="item hidden"><span class="minutes"></span> <span class="minutes-info">minuten</span></div>
-<div class="item hidden"><span class="seconds"></span> <span class="seconds-info">seconden</span></div>
-<div class="item toHide"><bold>De GameJam is nog niet begonnen</bold></div>
+<div class="item hidden">Nog <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span></div>
+<div class="item toHide"><bold>De GameJam is <br /> nog <strong>niet</strong> begonnen</bold></div>
 </div>
 
 </div>
@@ -58,15 +54,12 @@ socket.on('tick', function(timeLeft) {
     t = end.diff(start);
     var seconds = Math.floor( (t/1000) % 60 );
     var minutes = Math.floor( (t/1000/60) % 60 );
-    var hours = Math.floor( (t/(1000*60*60)) % 24 );
-    var days = Math.floor( t/(1000*60*60*24) );
-    $(".days").html(days);
-    $(".days-info").html(pluralize(days, plurals.days))
-    $(".hours").html(hours);
+    var hours = Math.floor( (t/(1000*60*60)) );
+    $(".hours").html(zeroPad(hours, 2));
     $(".hours-info").html(pluralize(hours, plurals.hours))
-    $(".minutes").html(minutes);
+    $(".minutes").html(zeroPad(minutes, 2));
     $(".minutes-info").html(pluralize(minutes, plurals.minutes))
-    $(".seconds").html(seconds);
+    $(".seconds").html(zeroPad(seconds, 2));
     $(".seconds-info").html(pluralize(seconds, plurals.seconds))
     $("#background-progress").css("width", (100*(timeLeft.percentage))+"%");
   } else {

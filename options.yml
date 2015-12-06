@@ -1,7 +1,6 @@
-options:
-  time:
-    start: "2015-12-07T13:00:00+0100"
-    end: "2015-12-08T19:00:00+0100"
-  song:
-    location: "song.mp3"
-    start: 300000
+time:
+  start: "2015-12-05T13:00:00+0100"
+  end: "2015-12-06T22:35:00+0100"
+song:
+  location: "song.mp3"
+  start: 180000

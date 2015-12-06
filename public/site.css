@@ -44,8 +44,9 @@
   justify-content: space-around;
   align-items: center;
   color: #D8D8D8;
-  font-size: 5vw;
+  font-size: 10vw;
   font-family: 'Noticia Text', serif;
+  text-align: center;
 }
 
 
@@ -56,3 +57,4 @@
 .hidden {
   display: none;
 }
+
