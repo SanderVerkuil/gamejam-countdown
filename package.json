@@ -1,0 +1,12 @@
+{
+  "name": "gamejam-countdown",
+  "version": "0.0.1",
+  "license": "",
+  "description": "Countdown website developed for the gamejams organized by DGDARC",
+  "dependencies": {
+    "express": "^4.10.2",
+    "moment": "^2.10.6",
+    "socket.io": "^1.3.7"
+  },
+  "repository": "https://github.com/SanderVerkuil/gamejam-countdown"
+}
