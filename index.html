@@ -2,11 +2,24 @@
 <html>
 <head>
   <title>GameJam Countdown</title>
-  <link rel="stylesheet" href="site.css" />
+  <link href='https://fonts.googleapis.com/css?family=Noticia+Text' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="public/site.css" />
 </head>
 <body>
 
-<div id="time"><span class="days"></span> <span class="hours"></span>:<span class="minutes"></span>:<span class="seconds"></span></div>
+<div id="wrapperForColor">
+<div id="wrapperForColorWindow"></div>
+<div id="background-progress">
+</div>
+
+<div class="container">
+<div class="item"><span class="days"></span> <span class="days-info">dagen</span></div>
+<div class="item"><span class="hours"></span> <span class="hours-info">uren</span></div>
+<div class="item"><span class="minutes"></span> <span class="minutes-info">minuten</span></div>
+<div class="item"><span class="seconds"></span> <span class="seconds-info">seconden</span></body>
+</div>
+
+</div>
 
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
@@ -15,6 +28,24 @@
 <script>
 var socket = io();
 socket.on('tick', function(timeLeft) {
+  var plurals = {
+    days: {
+      singular: "dag",
+      plural: "dagen"
+    },
+    hours: {
+      singular: "uur",
+      plural: "uren"
+    },
+    minutes: {
+      singular: "minuut",
+      plural: "minuten"
+    },
+    seconds: {
+      singular: "seconde",
+      plural: "seconden"
+    }
+  }
   console.log(timeLeft.percentage);
   var start = moment(timeLeft.start);
   var end = moment(timeLeft.end);
@@ -23,22 +54,28 @@ socket.on('tick', function(timeLeft) {
   var minutes = Math.floor( (t/1000/60) % 60 );
   var hours = Math.floor( (t/(1000*60*60)) % 24 );
   var days = Math.floor( t/(1000*60*60*24) );
-  var info = {
-    'total': t,
-    'days': days,
-    'hours': hours,
-    'minutes': minutes,
-    'seconds': seconds
-  };
   $(".days").html(days);
-  $(".hours").html(zeroPad(hours, 2));
-  $(".minutes").html(zeroPad(minutes, 2));
-  $(".seconds").html(zeroPad(seconds, 2));
+  $(".days-info").html(pluralize(days, plurals.days))
+  $(".hours").html(hours);
+  $(".hours-info").html(pluralize(hours, plurals.hours))
+  $(".minutes").html(minutes);
+  $(".minutes-info").html(pluralize(minutes, plurals.minutes))
+  $(".seconds").html(seconds);
+  $(".seconds-info").html(pluralize(seconds, plurals.seconds))
+  $("#background-progress").css("width", (100*(timeLeft.percentage))+"%");
 });
 
 function zeroPad(num, places) {
   var zero = places - num.toString().length+1;
   return Array(+(zero > 0 && zero)).join("0") + num;
+}
+
+function pluralize(num, object) {
+  if (num != 1)
+  {
+    return object.plural;
+  }
+  return object.singular;
 }
 </script>
 </body>
