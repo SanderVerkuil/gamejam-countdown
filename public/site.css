@@ -58,3 +58,27 @@
   display: none;
 }
 
+#dgdarc-logo {
+    position: absolute;
+    right: 1vw;
+    bottom: 1vh;
+    width: 47.63vh;
+    height: 20vh;
+    text-align: right;
+    background-image: url(./dgdarc.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#sticky-logo {
+  position: absolute;
+  left: 1vw;
+  bottom: 1vh;
+  width: 37.51vh;
+  height: 20vh;
+  background-image: url(./sticky.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
